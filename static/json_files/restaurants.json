@@ -1,0 +1,136 @@
+[
+    {
+        "name": "El Perico Taqueria",
+        "webpage": "http://www.google.com",
+        "phone": "(987) 654-3210",
+        "claimed": "True",
+        "tags": ["Food Stabds","Mexican"],
+        "hours": {
+            "Mon" : {"open": "8:00 AM","close":"8:00 PM"},
+            "Tue" : {"open": "8:00 AM","close":"8:00 PM"},
+            "Wed" : {"open": "8:00 AM","close":"8:00 PM"},
+            "Thu" : {"open": "8:00 AM","close":"8:00 PM"},
+            "Fri" : {"open": "8:00 AM","close":"9:00 PM"},
+            "Sat" : {"open": "8:00 AM","close":"9:00 PM"},
+            "Sun" : {"open": "8:00 AM","close":"9:00 PM"}
+        },
+        "address": "2105 US 92",
+        "city": "Auburndale",
+        "state": "FL",
+        "zip": "33823",
+        "reviews":[
+            {"reviewer":"Tom Cruze","rating":5,"review_comment":"Best Taco place."},
+            {"reviewer":"Tom Hardy","rating":1,"review_comment":"Worst Taco place."},
+            {"reviewer":"Tom Hanks","rating":3,"review_comment":"Good Taco place."},
+            {"reviewer":"Tom Latham","rating":2,"review_comment":"Bad Taco place."}
+    
+        ],
+        "review_count" : "4",
+        "rating": "3.2",
+        "image":"https://s3-media0.fl.yelpcdn.com/bphoto/xOLVZHetASCsUU2VRyi2rA/o.jpg"
+
+    },
+    {
+        "name": "Snoop’s Smash Burgers",
+        "phone": "(987) 654-3210",
+        "claimed": "False",
+        "tags": ["Food Stabds","Burgers"],
+        "hours": {
+            "Mon" : {"open": "8:00 AM","close":"8:00 PM"},
+            "Tue" : {"open": "8:00 AM","close":"8:00 PM"},
+            "Wed" : {"open": "8:00 AM","close":"8:00 PM"},
+            "Thu" : {"open": "8:00 AM","close":"8:00 PM"},
+            "Fri" : {"open": "8:00 AM","close":"9:00 PM"},
+            "Sat" : {"open": "8:00 AM","close":"9:00 PM"},
+            "Sun" : {"open": "8:00 AM","close":"9:00 PM"}
+        },
+        "address": "None",
+        "city": "Auburndale",
+        "state": "FL",
+        "zip": "None",
+        "reviews":[
+            {"reviewer":"Tom Cruze","rating":5,"review_comment":"Best  Burgers."},
+            {"reviewer":"Tom Hardy","rating":1,"review_comment":"Worst Burgers."},
+            {"reviewer":"Tom Hanks","rating":3,"review_comment":"Good  Burgers."},
+            {"reviewer":"Tom Latham","rating":2,"review_comment":"Bad  Burgers."},
+            {"reviewer":"Tom Snow","rating":5,"review_comment":"Best  Burgers."},
+            {"reviewer":"Tom Rain","rating":1,"review_comment":"Worst Burgers."},
+            {"reviewer":"Tom Sunny","rating":3,"review_comment":"Good  Burgers."},
+            {"reviewer":"Tom Winter","rating":2,"review_comment":"Bad  Burgers."}
+    
+        ],
+        "review_count" : "8",
+        "rating": "4.2",
+        "image":"https://s3-media0.fl.yelpcdn.com/bphoto/4IqBJCu8bfyywMSmz0CzJA/348s.jpg"
+
+    },
+    {
+        "name": "MacDonalds",
+        "phone": "(987) 654-3210",
+        "claimed": "True",
+        "tags": ["Food Stabds","Burgers"],
+        "hours": {
+            "Mon" : {"open": "8:00 AM","close":"8:00 PM"},
+            "Tue" : {"open": "8:00 AM","close":"8:00 PM"},
+            "Wed" : {"open": "8:00 AM","close":"8:00 PM"},
+            "Thu" : {"open": "8:00 AM","close":"8:00 PM"},
+            "Fri" : {"open": "8:00 AM","close":"9:00 PM"},
+            "Sat" : {"open": "8:00 AM","close":"9:00 PM"},
+            "Sun" : {"open": "8:00 AM","close":"9:00 PM"}
+        },
+        "address": "None",
+        "city": "Auburndale",
+        "state": "FL",
+        "zip": "None",
+        "reviews":[
+            {"reviewer":"Tom Cruze","rating":5,"review_comment":"Best  Burgers."},
+            {"reviewer":"Tom Hardy","rating":1,"review_comment":"Worst Burgers."},
+            {"reviewer":"Tom Hanks","rating":3,"review_comment":"Good  Burgers."},
+            {"reviewer":"Tom Latham","rating":2,"review_comment":"Bad  Burgers."},
+            {"reviewer":"Tom Snow","rating":5,"review_comment":"Best  Burgers."},
+            {"reviewer":"Tom Rain","rating":1,"review_comment":"Worst Burgers."},
+            {"reviewer":"Tom Sunny","rating":3,"review_comment":"Good  Burgers."},
+            {"reviewer":"Tom Winter","rating":2,"review_comment":"Bad  Burgers."}
+    
+        ],
+        "review_count" : "8",
+        "rating": "3.8",
+        "image":"https://media.istockphoto.com/id/458546943/photo/close-up-mcdonalds-outdoor-sign-against-blue-sky.jpg"
+
+    },
+    {
+        "name": "Subway",
+        "phone": "(987) 654-3210",
+        "webpage": "http://www.subway.com",
+        "claimed": "True",
+        "tags": ["Food Stabds","Burgers"],
+        "hours": {
+            "Mon" : {"open": "8:00 AM","close":"8:00 PM"},
+            "Tue" : {"open": "8:00 AM","close":"8:00 PM"},
+            "Wed" : {"open": "8:00 AM","close":"8:00 PM"},
+            "Thu" : {"open": "8:00 AM","close":"8:00 PM"},
+            "Fri" : {"open": "8:00 AM","close":"9:00 PM"},
+            "Sat" : {"open": "8:00 AM","close":"9:00 PM"},
+            "Sun" : {"open": "8:00 AM","close":"9:00 PM"}
+        },
+        "address": "2122 W Highway 92",
+        "city": "Auburndale",
+        "state": "FL",
+        "zip": "None",
+        "reviews":[
+            {"reviewer":"Tom Cruze","rating":5,"review_comment":"Best  Burgers."},
+            {"reviewer":"Tom Hardy","rating":1,"review_comment":"Worst Burgers."},
+            {"reviewer":"Tom Hanks","rating":3,"review_comment":"Good  Burgers."},
+            {"reviewer":"Tom Latham","rating":2,"review_comment":"Bad  Burgers."},
+            {"reviewer":"Tom Snow","rating":5,"review_comment":"Best  Burgers."},
+            {"reviewer":"Tom Rain","rating":1,"review_comment":"Worst Burgers."},
+            {"reviewer":"Tom Sunny","rating":3,"review_comment":"Good  Burgers."},
+            {"reviewer":"Tom Winter","rating":2,"review_comment":"Bad  Burgers."}
+    
+        ],
+        "review_count" : "8",
+        "rating": "4.5",
+        "image":"https://cdn.britannica.com/08/193908-050-66767D57/view-Subway-restaurant-Bangkok-Thailand.jpg"
+
+    }
+]
