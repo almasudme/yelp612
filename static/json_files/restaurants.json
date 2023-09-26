@@ -47,7 +47,7 @@
         "address": "None",
         "city": "Auburndale",
         "state": "FL",
-        "zip": "None",
+        "zip": "33823",
         "reviews":[
             {"reviewer":"Tom Cruze","rating":5,"review_comment":"Best  Burgers."},
             {"reviewer":"Tom Hardy","rating":1,"review_comment":"Worst Burgers."},
@@ -81,7 +81,7 @@
         "address": "None",
         "city": "Auburndale",
         "state": "FL",
-        "zip": "None",
+        "zip": "33823",
         "reviews":[
             {"reviewer":"Tom Cruze","rating":5,"review_comment":"Best  Burgers."},
             {"reviewer":"Tom Hardy","rating":1,"review_comment":"Worst Burgers."},
@@ -116,16 +116,16 @@
         "address": "2122 W Highway 92",
         "city": "Auburndale",
         "state": "FL",
-        "zip": "None",
+        "zip": "33823",
         "reviews":[
-            {"reviewer":"Tom Cruze","rating":5,"review_comment":"Best  Burgers."},
-            {"reviewer":"Tom Hardy","rating":1,"review_comment":"Worst Burgers."},
-            {"reviewer":"Tom Hanks","rating":3,"review_comment":"Good  Burgers."},
-            {"reviewer":"Tom Latham","rating":2,"review_comment":"Bad  Burgers."},
-            {"reviewer":"Tom Snow","rating":5,"review_comment":"Best  Burgers."},
-            {"reviewer":"Tom Rain","rating":1,"review_comment":"Worst Burgers."},
-            {"reviewer":"Tom Sunny","rating":3,"review_comment":"Good  Burgers."},
-            {"reviewer":"Tom Winter","rating":2,"review_comment":"Bad  Burgers."}
+            {"Helpful":"12","Thanks":"9","Love_This":"5","Oh_no":"0","reviewer":"Tom Cruze" ,"review_date":"5/5/2023","from_location":"Lexington,KY ","rating":4,"review_comment":"Best  Burgers."},
+            {"Helpful":"12","Thanks":"9","Love_This":"5","Oh_no":"0","reviewer":"Tom Hardy" ,"review_date":"7/7/2017","from_location":"Lexington,MA ","rating":1,"review_comment":"Worst Burgers."},
+            {"Helpful":"12","Thanks":"9","Love_This":"5","Oh_no":"0","reviewer":"Tom Hanks" ,"review_date":"1/1/2011","from_location":"Lexington,VA ","rating":3,"review_comment":"Good  Burgers."},
+            {"Helpful":"12","Thanks":"9","Love_This":"5","Oh_no":"0","reviewer":"Tom Latham","review_date":"2/2/2022","from_location":"London, KY","rating":2,"review_comment":"Bad  Burgers."},
+            {"Helpful":"12","Thanks":"9","Love_This":"5","Oh_no":"0","reviewer":"Tom Snow"  ,"review_date":"22/2/2022","from_location":"Paris, KY","rating":5,"review_comment":"Best  Burgers."},
+            {"Helpful":"12","Thanks":"9","Love_This":"5","Oh_no":"0","reviewer":"Tom Rain"  ,"review_date":"12/30/1985","from_location":"Lebanon, OH ","rating":1,"review_comment":"Worst Burgers."},
+            {"Helpful":"12","Thanks":"9","Love_This":"5","Oh_no":"0","reviewer":"Tom Sunny" ,"review_date":"7/7/2021","from_location":"Moscow, ID ","rating":3,"review_comment":"Good  Burgers."},
+            {"Helpful":"12","Thanks":"9","Love_This":"5","Oh_no":"0","reviewer":"Tom Winter","review_date":"2/5/2015","from_location":"Cincinnati,OH ","rating":2,"review_comment":"Bad  Burgers."}
     
         ],
         "review_count" : "8",
