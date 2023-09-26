@@ -1,8 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
+<!-- For rating stars-->
+<style>
+    .checked {
+      color: orange;
+    }
+</style>
+<!-- For rating stars end -->
 
 <div >
-    <div class="bg-img bg-cover" style="background-image: url('{{  restaurant_data.image }}'); height:300px; width:100%;">
+    <div class="bg-img bg-cover" style="background-image: url('{{  restaurant_data.image }}'); height:300px; width:100%;"></div>
         <br/><br/><br/><br/><br/><br/><br/><br/>
    <h1><strong> {{ restaurant_data.name }} </strong></h1>
    <h4> {{ restaurant_data.address + ", " + restaurant_data.city + ", " + restaurant_data.state}} </h4>
@@ -15,73 +22,191 @@
 <br/><br/>
 <hr/>
 
-
+<!--Container Start-->
 <div class="container">
     <div class="row">
-      <div class="col">
-        
-      </div>
-      <div class="col-6">
-        <div>
-            <button>Write a review </button>
-            <button>Add photo </button>
-            <button>share</button>
-            <button>Save</button>
-        </div>
-        <hr>
-        <div class="row">
-            <!-- Listing Item -->
-            <div class="col-sm-4 col-xs-4">
-                <div class="listing-item-image">
-                    <img src="{{ restaurant_data.image }}" alt="" width="125" height="125">
-                </div>					
-            </div>
-            <div class="col-md-7 col-xs-7">
-                <p>Quick Delivery on this addresss</p>
+        <div class="col-7">
+            <button >Write a review </button>
+            <button >Add a photo</button>
+            <button >share</button>
+            <button >save</button>
+            <hr>
+            <h4>Menu</h4>
+            <div class="row">
+                <div class="col-6">
+                    <button >Popular Dishes </button>  
+                </div>
+                <div class="col-6"> 
+                    <button >View Full Menu {{">"}} </button>   
+                </div>
+                <div class="col-12">foo <br> bar <br></div>
+                <div class="col-6">
+                    <button >Full Menu</button> 
+                </div>  
             </div>
             <hr>
-            <div class="col-md-7 col-xs-7">
-                <p>Menu</p>
-                
-                    <button>Full menu</button>
-                    <br>                
-            </div>
-            <hr>
-            <div class="col">
-                <div class="row">
-                <iframe width="100%" height="200" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=200&amp;hl=en&amp;q=Google,  {{ restaurant_data.address + ", " + restaurant_data.city + ", " + restaurant_data.state }}, USA&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+            <div class="row">
+                <div class="col-6">
+                    <h4>Location & Hours</h4>
+                    <iframe width="100%" height="200" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=200&amp;hl=en&amp;q=Google,  {{ restaurant_data.address + ", " + restaurant_data.city + ", " + restaurant_data.state }}, USA&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                    <div class="row">
+                        <div class="col-6"><p>{{ restaurant_data.address }} <br> {{restaurant_data.city + ", " + restaurant_data.state + " " +restaurant_data.zip}} </p></div>
+                        <div class="col-6"><button>Get directions</button></div>
+                    </div>
+                    
                 </div>
-                <div class="row">
-                   <div class="col">{{ restaurant_data.address + ", " + restaurant_data.city + ", " + restaurant_data.state}}</div>
-                   <div class="col"><button>Get Direction</button> </div>
-                </div>
-            </div>
-            <div class="col">
-                {% for key,dict_item in restaurant_data.hours.items() %}
-                <p>{{ key+"   "+dict_item.open+" - "+dict_item.close }}</p>
+                <div class="col-6">
+                    <h5 align="right">Suggest an edit</h5>
+                    {% for key,dict_item in restaurant_data.hours.items() %}
+                <p>{{ key+"   "+dict_item.open+" - "+dict_item.close }} 
+                    {% if  key == weekday %} <font color="green">open today</font>{% endif %}
+                </p>
                 {% endfor %}
+                </div>
             </div>
+            <hr>
+            <div class="row"> 
+                <h3>Recommended Reviews</h3>
+                <div class="col-6">
+                    Overall rating<br>
+                    <h1><font color="red">4.2</font>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                </h1>
+                <h5>{{restaurant_data.review_count}} reviewes</h5>
+                </div>
+                <div class="col-6">
+                    
+                    <div class="row">
+                        <div class="col-3">
+                            5 stars
+                        </div >
+                        <div class="col-9">
+                            <div id="myBar" class="w3-container w3-green" style="height:15px;width:100%"></div>
+                        </div>                       
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            4 stars
+                        </div >
+                        <div class="col-9">
+                            <div id="myBar" class="w3-container w3-green" style="height:15px;width:80%"></div>
+                        </div>                       
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            3 stars
+                        </div >
+                        <div class="col-9">
+                            <div id="myBar" class="w3-container w3-green" style="height:15px;width:10%"></div>
+                        </div>                       
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            2 stars
+                        </div >
+                        <div class="col-9">
+                            <div id="myBar" class="w3-container w3-green" style="height:15px;width:1%"></div>
+                        </div>                       
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            1 stars
+                        </div >
+                        <div class="col-9">
+                            <div id="myBar" class="w3-container w3-green" style="height:15px;width:5%"></div>
+                        </div>                       
+                        
+                    </div>
+                    
+                    
+                </div>
+                <hr>
+                <div class="row">
 
+                    <div class="col-6">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        UKYelp Sort
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#">Newest First</a></li>
+                        <li><a class="dropdown-item" href="#">Oldest First</a></li>
+                        <li><a class="dropdown-item" href="#">Highest Rated</a></li>
+                        <li><a class="dropdown-item" href="#">Lowest Rated</a></li>
+                        <li><a class="dropdown-item" href="#">Elites</a></li>
+                        </ul>
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Filter by rating
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">5 stars</a></li>
+                            <li><a class="dropdown-item" href="#">4 stars</a></li>
+                            <li><a class="dropdown-item" href="#">3 stars</a></li>
+                            <li><a class="dropdown-item" href="#">2 stars</a></li>
+                            <li><a class="dropdown-item" href="#">1 stars</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Search reviewes" aria-label="Search reviewes" aria-describedby="button-addon2">
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+                        </div> 
+                    </div>
+                </div>
+                <div class="row">
+                    {% for review in restaurant_data.reviews %}
+                    <h4>{{review.reviewer}}</h4>
+                    <h6>{{review.from_location}}</h6>
+                    <div>
+                        {% for i in range(review.rating) %}
+                        <span class="fa fa-star checked"></span>                        
+                        {% endfor %}
+                        {% for i in range(5-(review.rating)) %}
+                        <span class="fa fa-star "></span>                        
+                        {% endfor %}
+                        {{ review.review_date }}
+                    </div> 
+                    <p>{{ restaurant_data.reviews[0].review_comment }}</p>
+                    <!--
+                    <input type="checkbox" checked data-toggle="toggle" data-on="{{review.Helpful}}" data-off="{{review.Helpful}}" data-onstyle="success" data-offstyle="danger">
+                    <input type="checkbox" checked data-toggle="toggle" data-on="{{review.Thanks}}" data-off="{{review.Thanks}}" data-onstyle="success" data-offstyle="primary">
+                    <input type="checkbox" checked data-toggle="toggle" data-on="{{review.Love_this}}" data-off="{{review.Love_this}}" data-onstyle="success" data-offstyle="warning">
+                    <input type="checkbox" checked data-toggle="toggle" data-on="{{review.Oh_no}}" data-off="{{review.Oh_no}}" data-onstyle="success" data-offstyle="light"> -->
+                    {% endfor %}
+                </div>
+                <hr>
+            </div>
             
-            
         </div>
-        <hr/>
-      </div>
-      <div class="col-3">
-        <div style="border:0.5px solid gray;padding: 5px">
-            <p>Order Online & Pick Up Quick </p>
-            <button style="width: 100%">Order Online</button>
+        <div class="col-3">
+            <div style="border:0.5px solid gray;padding: 5px">
+                <p>Order Online & Pick Up Quick </p>
+                <button style="width: 100%">Order Online</button>
+            </div>
+            <br/>
+            <div style="border:0.5px solid gray;padding: 5px">
+                <a href="{{ restaurant_data.webpage }}">{{ restaurant_data.webpage }}</a>
+                <hr/>
+                <p><strong>{{ restaurant_data.phone }}</strong></p>
+                <hr/>
+                <p><strong>Get Directions</strong></p>
+                <p>{{ restaurant_data.address + ", " + restaurant_data.city + ", " + restaurant_data.state}} </p>
+                <div><button align="center">Suggest an edit </button></div>
+            </div>
+            <hr>
         </div>
-        <br/>
-        <div style="border:0.5px solid gray;padding: 5px">
-            <a href="{{ restaurant_data.webpage }}">{{ restaurant_data.webpage }}</a>
-            <hr/>
-            <p><strong>{{ restaurant_data.phone }}</strong></p>
-            <hr/>
-            <p><strong>Get Directions</strong></p>
-            <p>{{ restaurant_data.address + ", " + restaurant_data.city + ", " + restaurant_data.state}} </p>
-        </div>
-      </div>
     </div>
-  </div>
+    
+</div>
+
+<!--Container End-->
+
 {% endblock content %}
