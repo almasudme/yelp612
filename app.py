@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, url_for          
 import json
+import time,datetime
+
 restaurants = []
 with open('static/json_files/restaurants.json', 'r') as fp:
     restaurants = json.load(fp)
@@ -46,10 +48,15 @@ def single_restaurant(restaurant_name):
                            )
 
 
+@app.context_processor
+def inject_today_date():
+    return {'weekday': time.strftime('%a'),'today': datetime.date.today()}
+
 
 @app.route('/about')
 def about():
     return "<h1> About page</h1>"
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    # app.run(host='0.0.0.0',port=5000)
+    app.run(debug=True)
