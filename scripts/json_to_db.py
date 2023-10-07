@@ -5,7 +5,7 @@ import time
 sqlite_file = f"yelp_academic_dataset.db"
 conn = sqlite3.connect(sqlite_file)
 
-tables = ["business","review","user"]
+tables = ["user"]
 for table  in tables:
     start = time.time()
     json_file = f"/home/mir/flask_yelp/static/yelp_dataset/yelp_academic_dataset_{table}.json"
@@ -18,7 +18,12 @@ for table  in tables:
 
     # df.to_sql(name = table,con=conn,index=True, if_exists='replace')
     df.to_csv(f'{table}.csv' )
-    temp_df = pd.read_csv(f'{table}.csv')
+    print(f"processing csv file ...")
+    temp_df = pd.DataFrame()
+    chunks = pd.read_csv(f'{table}.csv',chunksize = 10000)
+    
+    for chunk in chunks:
+        temp_df = pd.concat([temp_df,chunk])
     temp_df.to_sql(name = table,con=conn,index=True, if_exists='replace')
     end = time.time()
     print(f"Elapsed: {(end - start)/60} min ")
