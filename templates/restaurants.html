@@ -139,13 +139,14 @@
 				</div>
 				<div class="col-md-7 col-xs-7">
 					<h4> {{ loop.index }}. {{ restaurant.name}} </h4>	
-					<p>Review rating: {{ restaurant.rating }} ({{ restaurant.rating }} reviews)</p>
-					{% for tag in restaurant.tags %}
-					<button>{{ tag }}</button>
+					<p>Review rating: {{ restaurant.stars }} ({{ restaurant.review_count }} reviews)</p>
+					{% for tag in restaurant.categories.split(",")[:3] %}
+					<button class="btn btn-sm btn-outline-secondary py-0" style="font-size: 0.8em;" >{{ tag }}</button>
+					
 					{% endfor %}
 					<p>Open from <time>10:00</time> to <time>21:00</time> every weekday.</p>
-					<p>{{ restaurant.reviews[0].review_comment }}<span id="dots">...</span><span id="more">erisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta.</span></p>
-					<a href="single_restaurant/{{ restaurant.name }}">Read more</a>
+					<p> {{ restaurant.first_review[:80]}} <span id="dots">...</span><span id="more"></span></p>
+					<a href="restaurant?business_id={{ restaurant.business_id }}">more</a>
 				</div>
 				
 				<!-- Listing Item / End -->
@@ -175,7 +176,7 @@
 		</div>
 		<div class="col">
 			<div>
-				<iframe width="125%" height="800" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=125%25&amp;height=800&amp;hl=en&amp;q=Google,  {{ current_location }}, USA&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>5
+				<iframe width="125%" height="800" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=125%25&amp;height=800&amp;hl=en&amp;q=Google,   Lakeland, FL , USA&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>5
 			</div>
 		</div>
 
