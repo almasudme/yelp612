@@ -1,5 +1,19 @@
+.fixed .button {
+  padding-top: 10px;
+  width: 65%;
+}
+.btn.btn-secondary{
+  border-style:solid;
+  border-width:1px;
+  border-color:#fff;
+  background-image: linear-gradient(to bottom, rgb(146, 143, 143), #7d7c7c);
+  text-align: left;
+}
+
 
 /* LINK */
+
+
 a:link { text-decoration: none; }
 
 
