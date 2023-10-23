@@ -10,73 +10,36 @@
 <!-- CSS
 ================================================== -->
 <link rel="stylesheet" href="static/css/style.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"  integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="p-3 mb-2 bg-light text-dark">
+<div class="row">
 	
-  
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<div class="col"><a href="http://localhost:5000/home">UKYelp</a></div>
-		<div class="continer">
-			<div class="col">
-			<div class="row">
-				
-	  
-				<form class="form-inline my-2 my-lg-0" action="restaurants" method="GET">
-					<input class="form-control mr-sm-2" type="search" placeholder="tacos, cheap dinner, Max's" name="item" aria-label="start search">		
-					<input class="form-control mr-sm-2" type="search" placeholder="Philadelphia, PA" name="place" aria-label="Location">
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-				</form>
-				
-			</div>
-			<!--row start -->
-			<div class="row">
-			<div>
-				<div class="dropdown">
-					<a href="restaurants"  >Restaurants</a>
-					<div class="dropdown-content">
-					  <a href="#">Delivery	</a>
-					  <a href="#">Burgers</a>
-					  <a href="#">Mexican</a>
-					</div>
-					<a href="restaurants"  >Home Services</a>
-					<div class="dropdown-content">
-					  <a href="#">Delivery	</a>
-					  <a href="#">Burgers</a>
-					  <a href="#">Mexican</a>
-					</div>
-					<a href="restaurants"  >Auto Services</a>
-					<div class="dropdown-content">
-					  <a href="#">Delivery	</a>
-					  <a href="#">Burgers</a>
-					  <a href="#">Mexican</a>
-					</div>
-				</div>
-				
-				<div class="dropdown">
-					<button href="http://www.google.com" class="dropbtn" >Others</button>
-					<div class="dropdown-content">
-					  <a href="#">1	</a>
-					  <a href="#">2</a>
-					  <a href="#">3</a>
-					</div>
-				</div>
-			</div>	
-				
-			</div>
-			<!--row end -->
-		</div>
+	<div class="col-3">
+		<div class="col"><a href="/home">UKYelp</a></div>
+	</div>
 
+	<div class="col-7">
+		<div>
+		<form class="form-inline " action="/restaurants" method="GET">
+			<input class="form-control " type="search" placeholder="tacos, cheap dinner, Max's" name="find_desc" aria-label="start search" style="width: 35%">		
+			<input class="form-control" type="search" placeholder="Address, neighborhood, city zip etc" name="find_loc" aria-label="Location" style="width: 35%">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+		</form>		
+	</div>
+	</div>
+	<div class="col-2" >
+		<div class="col-lg-4 col-sm-4 col-xs-4">
+			
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Write a review</button>
+					
+		</div>
 		
-		</div>
-		<div class="col">
-		</div>
-		<div class="col">
-			<div class="row">				
+		<div class="col-lg-4 col-sm-4 col-xs-4">
+			<div>				
 				<button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> Yelp for Business</button>
 				<ul class="dropdown-menu">
 					<li><a class="dropdown-item" href="#">Delivery</a></li>
@@ -85,20 +48,67 @@
 					<li><a class="dropdown-item" href="#">Italian</a></li>
 				</ul>
 			</div>
-			
-
 		</div>
-		<button type="button" class="btn btn-info" data-bs-toggle="dropdown" aria-expanded="false"> Write a riview</button>
-   </div>
-	<div>
 
+	</div>
 
-  </nav>
+</div>
+
+<div class="row">
+	
+	<div class="col-3">
+	
+	</div>
+	
+	<div class="col-6">
+			<div class="dropdown">
+			  <button href="restaurants" class="dropbtn" >Restaurants</button>
+				<div class="dropdown-content">
+					<a href="#">Delivery	</a>
+					<a href="#">Burgers</a>
+					<a href="#">Mexican</a>
+				</div>
+			</div>
+
+			<div class="dropdown">
+				<button href="#" class="dropbtn" >Home Services</button>
+				<div class="dropdown-content">
+					<a href="#">Delivery	</a>
+					<a href="#">Burgers</a>
+					<a href="#">Mexican</a>
+				</div>
+			</div>
+			<div class="dropdown">
+				<button href="#" class="dropbtn" >Auto Services</button>
+				<div class="dropdown-content">
+					<a href="#">Delivery	</a>
+					<a href="#">Burgers</a>
+					<a href="#">Mexican</a>
+				</div>
+		  </div>
+		
+		<div class="dropdown">
+			<button href="http://www.google.com" class="dropbtn" >Others</button>
+			<div class="dropdown-content">
+				<a href="#">1	</a>
+				<a href="#">2</a>
+				<a href="#">3</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-3">
+		
+	</div>
+
+</div>
+</div>
+</head>
+<body>
   {% block content %}
   {% endblock %}
-</head>
 
-<body>
+
+
 	
 	<!-- Footer -->
 	
@@ -135,7 +145,7 @@
 				</ul>
 			  </div>
 			</div>
-			<div class="col-md-3 col-sm-6">
+			<div class="col-md-6 col-sm-6">
 			  <!--Column1-->
 			  <div class="footer-pad">
 				<h4>Yelp for Business</h4>

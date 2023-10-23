@@ -1,187 +1,103 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
-
-<!--https://getbootstrap.com/docs/4.0/components/button-group/-->
-
-
-
-<!-- Content
-================================================== -->
-<div class="container">
-	<div class="row">
-		<!-- Sidebar
-		================================================== -->
-		<div class="col-3">
-			<div class="sidebar">
-
-				<!-- Widget -->
-				<div class="widget margin-bottom-40">
-					<h3 class="margin-top-0 margin-bottom-30">Filters</h3>
-
-					<!-- Row -->
-					<h3 class="margin-top-0 margin-bottom-30">Price</h3>
-					<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-						<input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
-						<label class="btn btn-outline-primary" for="btncheck1">$</label>
-						<input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
-						<label class="btn btn-outline-primary" for="btncheck2">$$</label>
-						<input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
-						<label class="btn btn-outline-primary" for="btncheck3">$$$</label>
-						<input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
-						<label class="btn btn-outline-primary" for="btncheck4">$$$$</label>
-						
-						
-						   
-						
-					</div>
-					<hr class="hr hr-blurry" />	
-					
-					<!-- Row end-->
-					
-					
-
-
-
-					<!-- More Search Options -->
-					
-
-					
-
-						<!-- Checkboxes -->
-						
-						{% for filter in suggested_filters %}
-						<div class="form-check">
-							<input id="{{ filter }}" type="checkbox" name="check">
-							<label for="{{ filter }}">{{ filter }}</label>
-						</div>
-						{% endfor %}						
-					
-						
-						
-						<hr class="hr hr-blurry" />	
-						<!-- Checkboxes / End -->
-						
-						
-						<!-- Buttons -->
-						<!--https://getbootstrap.com/docs/5.1/components/button-group/ -->
-						
-							{% for filter in category_filters %}
-							<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-							<input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
-							<label class="btn btn-outline-primary" for="btncheck1">{{ filter }}</label>
-							</div>
-						   {% endfor %}
-						   <hr class="hr hr-blurry" />	
-						  
-						<!-- Buttons / End -->
-
-						<!-- Buttons -->
-						
-						{% for filter in distance_filters %}
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-							<label class="form-check-label" for="flexRadioDefault1">
-							  {{ filter }}
-							</label>
-						</div>
-					   {% endfor %}
-					   <hr class="hr hr-blurry" />	
-					  
-					<!-- Buttons / End -->
-					
-					<!-- More Search Options / End -->
-
-					
-
-				</div>
-				<!-- Widget / End -->
-
+<div class="row" style="padding:10px"> 
+	<!--=====================================================================================-->
+	<div class="col-3">
+		<div class="row"> 
+			<div class="col-3">
+				<button type="button" class="btn btn-outline-dark"> All Filters</button>
+				<!--utton class="btn btn-outline-success my-2 my-sm-0" type="submit -->
 			</div>
-		</div>
-		<!-- Sidebar / End -->
-
-		<div class="col-6">
-
-			
-			<div class="row margin-bottom-25">
-
-				<div class="col-md-6 col-xs-6"></div>
-
-				<div class="col-md-6 col-xs-6">
-					<!-- Sort by -->
-					<div class="sort-by">
-						<div class="sort-by-select">
-							<select data-placeholder="Default order" class="chosen-select-no-single">
-								<option>Default Order</option>	
-								<option>Highest Rated</option>
-								<option>Most Reviewed</option>
-								<option>Newest Listings</option>
-								<option>Oldest Listings</option>
-							</select>
+			<div class="col-3">			
+				<button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> Price</button>
+				<ul class="dropdown-menu">
+					<li><input type="checkbox" name="dropdown-group" value="$" />$</li>
+					<li><input type="checkbox" name="dropdown-group" value="$$" />$$</li>
+					<li><input type="checkbox" name="dropdown-group" value="$$$" />$$$</li>
+					<li><input type="checkbox" name="dropdown-group" value="$$$$" />$$$$</li>
+					<li><hr></li>
+					<li><a class="dropdown-item" href="#">save</a></li>
+				</ul>
+			</div>
+			<div class="col-3">
+				<button type="button" class="btn btn-outline-dark"> Open Now</button>
+			</div>
+			<div class="col-3">
+				<button type="button" class="btn btn-outline-dark"> Offers Delivery</button>
+			</div>
+	  </div>
+		<hr>
+		<div class="scroll">
+		{% for restaurant in restaurants %}
+			<div class="card" >
+				<div class="card-body">
+					<div class="row">
+						<!-- Listing Item -->
+						<div class="col-sm-4 col-xs-4">
+							<div class="listing-item-image">
+								<img src="{{ restaurant[11] }}" alt="" width="125" height="125">
+							</div>					
 						</div>
-					</div>
-				</div>
-			</div>
-			
-
-
-			
-			{% for restaurant in restaurants %}
-			
-			<div class="row">
-				<!-- Listing Item -->
-				<div class="col-sm-4 col-xs-4">
-					<div class="listing-item-image">
-						<img src="{{ restaurant.image }}" alt="" width="125" height="125">
-					</div>					
-				</div>
-				<div class="col-md-7 col-xs-7">
-					<h4> {{ loop.index }}. {{ restaurant.name}} </h4>	
-					<p>Review rating: {{ restaurant.stars }} ({{ restaurant.review_count }} reviews)</p>
-					{% for tag in restaurant.categories.split(",")[:3] %}
-					<button class="btn btn-sm btn-outline-secondary py-0" style="font-size: 0.8em;" >{{ tag }}</button>
-					
-					{% endfor %}
-					<p>Open from <time>10:00</time> to <time>21:00</time> every weekday.</p>
-					<p> {{ restaurant.first_review[:80]}} <span id="dots">...</span><span id="more"></span></p>
-					<a href="restaurant?business_id={{ restaurant.business_id }}">more</a>
-				</div>
-				
-				<!-- Listing Item / End -->
-			</div>
-			<hr/>
-			{% endfor %}
-			
-			<!-- Pagination -->
-			<div class="clearfix"></div>
-			<div class="row">
-				<div class="col-md-12">
-					<!-- Pagination -->
-					<div class="pagination-container margin-top-20 margin-bottom-40">
-						<nav class="pagination">
+						<div class="col-md-7 col-xs-7">
+							<h4> {{ loop.index }}. {{ restaurant[1]}} </h4>	
+							<p>Review rating: {{ restaurant[8] }} ({{ restaurant[10] }} reviews)</p>
 							
-								<li><a href="#" class="current-page">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#"><i class="sl sl-icon-arrow-right"></i></a></li>
+								{% for tag in restaurant[9].split(",")[:3] %}
+								<button class="btn btn-sm btn-outline-secondary py-0" style="font-size: 0.8em;" >{{ tag }}</button>
+								
+								{% endfor %}
 							
-						</nav>
+							{% set str_time = restaurant[12] %}
+							{%if str_time %}
+							{% set str_days = str_time.split(",") %}
+							{% for str_day in str_days %}
+							{% set temp = str_day|replace("{","")|replace("}","")| replace("'","") %}
+							{% set day,time  = temp.split(": ") %}
+							{% if day[:3] == weekday[:3] %}
+							{% set till = time.split("-")[1].split(":")[0]|int %}
+							{% set till = till%12  %}
+							{% set till = till|string  %}
+							{% set till = till+'PM' %}
+							{% if till == '0' %}{%set till = '12 AM' %}{%endif%}
+							<p>open till {{till }} </p>
+							{%endif%}
+							{% endfor %}
+							
+							{% endif %}
+
+							<p> {{ get_one_review(restaurant[0])}} <span id="dots">...</span><span id="more"></span></p>
+							<a href="restaurant?business_id={{ restaurant[0] }}">more</a>
+						</div>
+						
+						<!-- Listing Item / End -->
 					</div>
 				</div>
 			</div>
-			<!-- Pagination / End -->
-
+			
+		{% endfor %}
 		</div>
-		<div class="col">
-			<div>
-				<iframe width="125%" height="800" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=125%25&amp;height=800&amp;hl=en&amp;q=Google,   Lakeland, FL , USA&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>5
-			</div>
-		</div>
-
-
-		
 	</div>
+
+	<!--=====================================================================================-->
+	<div class="col-9">
+		<div class="card" style="height:100%">
+			<div class="card-body" style="height:100%">
+				<div class="row" style="height:100%">
+					<div class="ind-contato" style="height:100%">
+						{%set home = "1208 Orange blossom Circle,Auburndale, FL"%}
+				{% set school =  "4700 research way , lakeland , FL "%}
+						<iframe  src="https://maps.google.com/maps?width=125%25&amp;height=800&amp;hl=en&amp;q=Google,   [{{ home,school }} ,  {{school}} ]  &amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+							frameborder="0" allowfullscreen></iframe>
+					
+						
+					
+					</div>
+			  </div>
+		  </div>
+		</div>
+	</div>
+	<!--=====================================================================================-->
 </div>
+	
 {% endblock %}
