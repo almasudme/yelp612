@@ -4,6 +4,8 @@ import time,datetime
 import sqlite3 
 from pymongo import MongoClient, InsertOne
 from pprint import pprint
+from collections import namedtuple
+from flask_sqlalchemy import SQLAlchemy
 
 
 #==============================================
@@ -26,12 +28,15 @@ col_user = db["user"]
 #=============================================
 
 
-restaurants = []
+
 
 # sql database connection 
-basename = 'reviewusers_mini'
 
-db_file_name = basename + '.db'
+import os
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+db_file_name = 'static/database/yelp_academic_dataset.db'
+
 
 ##
 with open('static/json_files/restaurants.json', 'r') as fp:
@@ -51,6 +56,20 @@ def connect_db(db_file_name):
 
 def get_current_location():
     from geopy.geocoders import Nominatim
+
+def get_hour_map(str_json):
+    if not str_json:
+        return {}
+    str_json = str_json[1:-1].replace("'","")
+    
+    day_time = {}
+    for item in str_json.split(","):
+        temp =  item.split(": ")
+        day,time = temp[0],temp[1]
+        day_time.update({day:time})
+        pprint(day_time)
+    return day_time
+
     
 #==================================
 
@@ -68,52 +87,46 @@ def home():
 
 @app.route('/restaurants')
 def restaurants_list():
-    item = request.args.get("item") 
-    city = request.args.get("city")
+    description = request.args.get("find_desc","restaurant") 
+    location = request.args.get("find_loc","wilmington")
+    location_search_string = f" and  ( b.address like '%{location}%' \
+        or b.city  like '%{location}%' \
+        or b.state  like '%{location}%' \
+    )"
+
+    desc_search_string = f" and  ( b.categories like '%{description}%')"
+    
    
-    filter = "open now"
+    str_query = f"SELECT r.id, r.name , r.alias, r.display_phone, r.price,"
+    str_query += f"b.address,b.city,b.state,b.stars, b.categories , r.review_count, r.image_url,"
+    str_query += f" b.hours "
+    str_query += f" FROM business b, restaurant r"
+    str_query += f" where b.business_id = r.id "
+    str_query += f" and ( b.categories like '%restaurant%' or b.categories like '%food%') "
+    str_query += f" { location_search_string } "
+    str_query += f" {desc_search_string} "
+    str_query += f" LIMIT 10   "
+    print(str_query)
+    conn = connect_db(db_file_name)
+    restaurant_data = conn.cursor().execute(str_query).fetchall()
+    conn.close()
     
-    search_dict = {}
-    if city :        
-        search_dict.update({'city':city})
-    else:
-        city,state = current_location.split()
-        city = city.strip()
-        state = state.replace(" ","")
-        print(city,state)
-
-
-            
-
-       
-    review_data = []
-    count = 0
-    print(f"search dict: {search_dict}")
-    businesses = col_business.find(search_dict)
-
+    # str_query = "SELECT text from review\
+    #             where business_id = 'Dy91wdWkwtI_qgjAIZ0Niw'\
+    #             order by useful desc\
+    #             LIMIT 1"
+    # review= connect_db(db_file_name).cursor().execute(str_query).fetchone()[0]
     
-
-
-
-    for business in businesses:
-        temp_dict = business        
-        
-        reviews = col_review.find_one({"business_id": business['business_id'] })
-        temp_dict["first_review"] = reviews['text']
-        review_data.append(temp_dict) 
-        # print(review_data)    
-        
-        count += 1
-        if count>10: break
-     
+    
     return render_template('restaurants.html',
-                           restaurants = review_data,
-                           review_data = review_data,
-                           suggested_filters = suggested_filters,
-                           category_filters = category_filters,
-                           features_filters = features_filters,
-                           distance_filters = distance_filters,
-                           current_location = current_location
+                           restaurants = restaurant_data,
+                        #    review = review
+                        #    review_data = review_data,
+                        #    suggested_filters = suggested_filters,
+                        #    category_filters = category_filters,
+                        #    features_filters = features_filters,
+                        #    distance_filters = distance_filters,
+                        #    current_location = current_location
                            
 
                            )
@@ -127,50 +140,82 @@ def restaurant():
     city = request.args.get("city")
     filter_type = int(request.args.get("filter_type",0))
     sort_type = request.args.get("sort_type",None)
-    print(business_id,filter_type)
-    search_dict={}
-    search_dict.update({'business_id':business_id})
-    if city:search_dict.update({'city':city})
+    search_string = request.args.get("word","")
+    # print(business_id,filter_type)
+    str_query = f" SELECT r.id, r.name , r.alias, r.display_phone, r.price,\
+        b.address,b.city,b.state,b.stars, b.categories , r.review_count, r.image_url,\
+        b.hours, b.postal_code \
+        FROM business b, restaurant r \
+        where b.business_id = r.id \
+        and b.business_id = '{business_id}'"
+    list_of_keys = "business_id name alias display_phone price address city state stars categories review_count image_url hours".split(" ")
+    print(str_query)
+    conn = connect_db(db_file_name)
+    query_result = conn.cursor().execute(str_query).fetchone()
+    conn.close()
+    restaurant_data =  dict(zip(list_of_keys,query_result))
+    restaurant_data['hours'] = get_hour_map(restaurant_data['hours'])
     
 
+    # == 
+    sort_string = "order by useful desc"
+    if sort_type:
+        if sort_type == "newestfirst":
+            sort_string = "order by date desc"
+        elif sort_type == "oldestfirst":
+            sort_string = "order by date asc"
+        elif sort_type == "highestrated":
+            sort_string = "order by stars desc"
+        elif sort_type == "lowestrated":
+            sort_string = "order by stars asc"
+        elif sort_type == "elites":
+            sort_string = "order by useful desc"
+    else:
+        sort_string = "order by useful desc"
 
-    print(f"search string: {search_dict}")
-    a_business = col_business.find_one(search_dict)
-    print(f"---query complete.")
+    filter_dict = {
+        5:"and stars = 5.0",
+        4:"and stars = 4.0",
+        3:"and stars = 3.0",
+        2:"and stars = 2.0",
+        1:"and stars = 1.0",
+        0:""
 
-    # return "<h1>"+str(temp_dict)+"</h1>"
+    }
+    filter_string  = filter_dict[filter_type]
+    review_search_string = f"and text like '%{search_string}%'"
+    str_query = f"SELECT name ,business_id, stars , useful, funny, cool,date,text from review_table\
+                where business_id = '{business_id}' \
+                {review_search_string} \
+                {filter_string} \
+                {sort_string}\
+                LIMIT 10"
+    print(str_query)
+    conn = connect_db(db_file_name)
+    reviews = conn.cursor().execute(str_query).fetchall()
+    conn.close()
+
+    # return "<h1>"+str(restaurant_data['hours'])+"</h1>"
     
     
     
     # reviews = col_review.find({"business_id": business_id })
 
     
-    if sort_type:
-        if sort_type == "newestfirst":
-            reviews= reviews.sort('date',-1)
-        elif sort_type == "oldestfirst":
-            reviews= reviews.sort('date',1)
-        elif sort_type == "highestrated":
-            reviews= reviews.sort('stars',1)
-        elif sort_type == "lowestestrated":
-            reviews= reviews.sort('stars',-1)
-        elif sort_type == "elites":
-            reviews= reviews.sort('usefule',1)
+    # if sort_type:
+    #     if sort_type == "newestfirst":
+    #         reviews= reviews.sort('date',-1)
+    #     elif sort_type == "oldestfirst":
+    #         reviews= reviews.sort('date',1)
+    #     elif sort_type == "highestrated":
+    #         reviews= reviews.sort('stars',1)
+    #     elif sort_type == "lowestestrated":
+    #         reviews= reviews.sort('stars',-1)
+    #     elif sort_type == "elites":
+    #         reviews= reviews.sort('usefule',1)
 
-    count_stars = {
-        '5':0,
-        '4':0,
-        '3':0,
-        '2':0,
-        '1':0
-    }
-    count_stars_percent = {
-        '5':25,
-        '4':35,
-        '3':15,
-        '2':20,
-        '1':5
-    }
+
+
     # review_data =[]
     
      
@@ -181,19 +226,14 @@ def restaurant():
     #     review['name'] =  reviewer_names[user_id]
     #     review_data.append(review)
 
-    # count_sum = sum([count_stars[key] for key in count_stars.keys()])
-    # if count_sum == 0:
-    #     count_sum = 1
-    # count_stars_percent = { key:int(100*val/count_sum) for (key,val) in count_stars.items() }
-    # print(count_stars_percent, count_sum)
-    count_sum = 100
+
 
     
     return render_template('single_restaurant.html', 
-                           restaurant_data = a_business,
-                        #    reviews = reviews,
-                           count_sum = count_sum,
-                           count_stars_percent = count_stars_percent,
+                           restaurant_data = restaurant_data,
+                           reviews = reviews,
+                           search_string = search_string
+
                            
                            )
     
@@ -248,6 +288,47 @@ def single_restaurant(business_id):
 @app.context_processor
 def inject_today_date():
     return {'weekday': time.strftime('%A'),'today': datetime.date.today()}
+
+
+
+@app.context_processor
+def get_reviews_of_a_business():
+    def get_one_review(business_id):
+        str_query = f"SELECT name ,business_id, stars , useful, funny, cool,date,text from review_table\
+                    where business_id = '{business_id}' \
+                    LIMIT 1" 
+        conn = connect_db(db_file_name)   
+        reviews = conn.cursor().execute(str_query).fetchall()
+        conn.close()
+        review_comment = reviews[0][7]
+        return f"{review_comment[:80]}"
+    
+
+    return dict(get_one_review=get_one_review)
+
+@app.context_processor
+def get_reviews_percent_of_a_business():
+    def get_review_percent(business_id):
+        import numpy as np
+        str_query = f"select stars ,count(stars) from review_table \
+            where business_id = '{business_id}' \
+            group by stars"
+        conn  = connect_db(db_file_name)
+        rows = conn.cursor().execute(str_query).fetchall()
+        print(f"getting review percent for {business_id}")
+        conn.close()
+        sum = np.sum([row[1] for row in rows])
+        
+        review_percent = [0,0,0,0,0]
+        if not sum == 0:
+              
+            for row in rows:
+                print(row)
+                review_percent[int(row[0])-1] = int(100*row[1]/sum)
+            
+        print(review_percent)
+        return review_percent
+    return dict(get_review_percent=get_review_percent)
 
 
 @app.route('/about')
