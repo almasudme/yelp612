@@ -1,12 +1,166 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<!--
+<a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+  Link with href
+</a>
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+  Button with data-bs-target
+</button>
+-->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Filters</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+      <label> Price</label><br>
+			<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+				<input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+				<label class="btn btn-outline-primary" for="btncheck1">$</label>
+			
+				<input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+				<label class="btn btn-outline-primary" for="btncheck2">$$</label>
+
+				<input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+				<label class="btn btn-outline-primary" for="btncheck3">$$$</label>
+			
+				<input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
+				<label class="btn btn-outline-primary" for="btncheck4">$$$$</label>
+			</div>
+    </div>
+		<div>
+      <label>Suggested</label>
+			<div class="form-check">
+				<input type="checkbox" class="form-check-input" id="check1" name="option1" value="something" checked>
+				<label class="form-check-label" for="check1">Open Now</label>
+			</div>
+			<div class="form-check">
+				<input type="checkbox" class="form-check-input" id="check2" name="option2" value="something">
+				<label class="form-check-label" for="check2">Offers Delivery</label>
+			</div>
+			<div class="form-check">
+				<input type="checkbox" class="form-check-input" >
+				<label class="form-check-label">Reservations</label>
+			</div>
+			<div class="form-check">
+				<input type="checkbox" class="form-check-input" >
+				<label class="form-check-label">Offers takeout</label>
+			</div>
+			<div class="form-check">
+				<input type="checkbox" class="form-check-input" >
+				<label class="form-check-label">Good for dinner</label>
+			</div>
+			<div class="form-check">
+				<input type="checkbox" class="form-check-input" >
+				<label class="form-check-label">Outdoor seating</label>
+			</div>
+			
+
+    </div>
+		<hr>
+		<div>
+      <label>Category</label><br>
+			<input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off">
+			<label class="btn btn-outline-primary" for="btncheck5">American New</label>
+		
+			<input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off">
+			<label class="btn btn-outline-primary" for="btncheck6">Italian</label>
+		
+			<input type="checkbox" class="btn-check" id="btncheck7" autocomplete="off">
+			<label class="btn btn-outline-primary" for="btncheck7">Restaurants</label>
+
+			<input type="checkbox" class="btn-check" id="btncheck8" autocomplete="off">
+			<label class="btn btn-outline-primary" for="btncheck8">American (Traditional)</label>
+		
+			<input type="checkbox" class="btn-check" id="btncheck9" autocomplete="off">
+			<label class="btn btn-outline-primary" for="btncheck9">Steakhouses</label>
+		
+			<input type="checkbox" class="btn-check" id="btncheck10" autocomplete="off">
+			<label class="btn btn-outline-primary" for="btncheck10">Seafood</label>
+			<br>
+			<a type="button">see all </a>
+
+    </div>
+		<hr>
+		<div>
+      <label>Features</label>
+			<div class="form-check">
+				<input type="checkbox" class="form-check-input" id="check1" name="option1" value="something" checked>
+				<label class="form-check-label" for="check1">Good for kids</label>
+			</div>
+			<div class="form-check">
+				<input type="checkbox" class="form-check-input" id="check2" name="option2" value="something">
+				<label class="form-check-label" for="check2">Good for lunch</label>
+			</div>
+			<div class="form-check">
+				<input type="checkbox" class="form-check-input" >
+				<label class="form-check-label">Good for groups</label>
+			</div>
+			<div class="form-check">
+				<input type="checkbox" class="form-check-input" >
+				<label class="form-check-label">Dogs allowed</label>
+			</div>
+			<div class="form-check">
+				<input type="checkbox" class="form-check-input" >
+				<label class="form-check-label">Full bar</label>
+			</div>
+			<div class="form-check">
+				<input type="checkbox" class="form-check-input" >
+				<label class="form-check-label">Waitlist</label>
+			</div>
+			
+			<a type="button">see all </a>
+			<hr>
+    </div>
+
+		<div>
+      <label>Distance</label>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+				<label class="form-check-label" for="flexRadioDefault1">
+					Birds Eye View
+				</label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+				<label class="form-check-label" for="flexRadioDefault1">
+					Driving (5 mi)
+				</label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+				<label class="form-check-label" for="flexRadioDefault1">
+					Biking (2 mi)
+				</label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+				<label class="form-check-label" for="flexRadioDefault1">
+					Walking (1 mi)
+				</label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+				<label class="form-check-label" for="flexRadioDefault1">
+					Within 4 blocks
+				</label>
+			</div>
+			<br><br><br><br>
+    </div>
+		<a href="#" class="btn btn-clear mt-3">Cancel</a>
+    <button type="submit" class="btn btn-danger mt-3">Apply Filters</button>
+  </div>
+</div>
+
 <div class="row" style="padding:10px"> 
 	<!--=====================================================================================-->
-	<div class="col-3">
+	<div class="col-sm-12 col-md-3">
 		<div class="row"> 
 			<div class="col-3">
-				<button type="button" class="btn btn-outline-dark"> All Filters</button>
+				<button type="button" class="btn btn-outline-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"> All Filters</button>
 				<!--utton class="btn btn-outline-success my-2 my-sm-0" type="submit -->
 			</div>
 			<div class="col-3">			
@@ -27,71 +181,94 @@
 				<button type="button" class="btn btn-outline-dark"> Offers Delivery</button>
 			</div>
 	  </div>
-		<hr>
+		
 		<div class="scroll">
+		{% set restaurant_count = restaurants| length %}
+		
+		{% set current_page = pageno |int%}
+		
 		{% for restaurant in restaurants %}
-			<div class="card" >
-				<div class="card-body">
-					<div class="row">
-						<!-- Listing Item -->
-						<div class="col-sm-4 col-xs-4">
-							<div class="listing-item-image">
-								<img src="{{ restaurant[11] }}" alt="" width="125" height="125">
-							</div>					
-						</div>
-						<div class="col-md-7 col-xs-7">
-							<h4> {{ loop.index }}. {{ restaurant[1]}} </h4>	
-							<p>Review rating: {{ restaurant[8] }} ({{ restaurant[10] }} reviews)</p>
-							
-								{% for tag in restaurant[9].split(",")[:3] %}
-								<button class="btn btn-sm btn-outline-secondary py-0" style="font-size: 0.8em;" >{{ tag }}</button>
+			
+			{% set marker_no = (pageno-1)*10+ loop.index %}
+			<!--https://developers.google.com/maps/documentation/javascript/marker-clustering#cdn_1-->
+				<div class="card" >
+					<div class="card-body">
+						<div class="row">
+							<!-- Listing Item -->
+							<div class="col-sm-4 col-xs-4">
+								<div class="listing-item-image">
+									<img src="{{ restaurant[11] }}" alt="" width="125" height="125">
+								</div>					
+							</div>
+							<div class="col-md-7 col-xs-7">
+								<h4> {{ marker_no }}. {{ restaurant[1]}} </h4>	
+								<p>Review rating: {{ restaurant[8] }} ({{ restaurant[10] }} reviews)</p>
 								
+									{% for tag in restaurant[9].split(",")[:3] %}
+									<button class="btn btn-sm btn-outline-secondary py-0" style="font-size: 0.8em;" >{{ tag }}</button>
+									
+									{% endfor %}
+								
+								{% set str_time = restaurant[12] %}
+								{%if str_time %}
+								{% set str_days = str_time.split(",") %}
+								{% for str_day in str_days %}
+								{% set temp = str_day|replace("{","")|replace("}","")| replace("'","") %}
+								{% set day,time  = temp.split(": ") %}
+								{% if day[:3] == weekday[:3] %}
+								{% set till = time.split("-")[1].split(":")[0]|int %}
+								{% set till = till%12  %}
+								{% set till = till|string  %}
+								{% set till = till+'PM' %}
+								{% if till == '0' %}{%set till = '12 AM' %}{%endif%}
+								<p>open till {{till }} </p>
+								{%endif%}
 								{% endfor %}
-							
-							{% set str_time = restaurant[12] %}
-							{%if str_time %}
-							{% set str_days = str_time.split(",") %}
-							{% for str_day in str_days %}
-							{% set temp = str_day|replace("{","")|replace("}","")| replace("'","") %}
-							{% set day,time  = temp.split(": ") %}
-							{% if day[:3] == weekday[:3] %}
-							{% set till = time.split("-")[1].split(":")[0]|int %}
-							{% set till = till%12  %}
-							{% set till = till|string  %}
-							{% set till = till+'PM' %}
-							{% if till == '0' %}{%set till = '12 AM' %}{%endif%}
-							<p>open till {{till }} </p>
-							{%endif%}
-							{% endfor %}
-							
-							{% endif %}
+								
+								{% endif %}
 
-							<p> {{ get_one_review(restaurant[0])}} <span id="dots">...</span><span id="more"></span></p>
-							<a href="restaurant?business_id={{ restaurant[0] }}">more</a>
+								<p> {{ get_one_review(restaurant[0])}} <span id="dots">...</span><span id="more"></span></p>
+								<a href="restaurant?business_id={{ restaurant[0] }}">more</a>
+							</div>
+							
+							<!-- Listing Item / End -->
 						</div>
-						
-						<!-- Listing Item / End -->
 					</div>
 				</div>
-			</div>
 			
 		{% endfor %}
+		</div>
+		<div class="pagination">
+			<a href="#">&laquo;</a>
+			{% set pages = range(1,page_count+1 )  %}
+			{% for page in pages %}
+			 
+					{% if page == current_page %}
+					<a class="active" href="search?item=Burgers&place=Philadelphia&pageno={{ page }}">{{page}}</a>
+					{% else %}
+					<a  href="search?item=Burgers&place=Philadelphia&pageno={{ page }}">{{page}} </a>
+					{% endif %}
+			
+			
+			{% endfor %}
+		
 		</div>
 	</div>
 
 	<!--=====================================================================================-->
-	<div class="col-9">
+	<div class="d-none d-lg-block col-9">
 		<div class="card" style="height:100%">
 			<div class="card-body" style="height:100%">
 				<div class="row" style="height:100%">
 					<div class="ind-contato" style="height:100%">
 						{%set home = "1208 Orange blossom Circle,Auburndale, FL"%}
 				{% set school =  "4700 research way , lakeland , FL "%}
-						<iframe  src="https://maps.google.com/maps?width=125%25&amp;height=800&amp;hl=en&amp;q=Google,   [{{ home,school }} ,  {{school}} ]  &amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-							frameborder="0" allowfullscreen></iframe>
+						<!--iframe  src="https://maps.google.com/maps?width=125%25&amp;height=800&amp;hl=en&amp;q=Google,   [{{ home,school }} ,  {{school}} ]  &amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+							frameborder="0" allowfullscreen></iframe-->
 					
 						
-					
+							<div id="map"></div>
+
 					</div>
 			  </div>
 		  </div>
@@ -99,5 +276,44 @@
 	</div>
 	<!--=====================================================================================-->
 </div>
-	
+<script type="text/javascript">
+
+		
+    var locations = {{ locations | safe }}
+		var pageno = {{ pageno | safe }}
+		
+    
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 10,
+      center: new google.maps.LatLng(locations[0][1], locations[0][2]),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+    
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+    
+    for (i = 0; i < locations.length; i++) { 
+			const label_text = (10*(pageno-1)+ (i+1)) . toString()
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map,
+				label:{
+					color:'#FFF',
+					text: label_text,
+					fontsize:'12px',
+					fontWeight: 'bold'
+				}
+				
+      });
+      
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+  </script>
+
 {% endblock %}
