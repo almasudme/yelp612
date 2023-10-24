@@ -1,11 +1,15 @@
-from flask import Flask, render_template, request, url_for          
+from flask import Flask, render_template, request, url_for ,jsonify         
 import json
 import time,datetime
 import sqlite3 
 from pymongo import MongoClient, InsertOne
 from pprint import pprint
 from collections import namedtuple
-from flask_sqlalchemy import SQLAlchemy
+
+from flask_googlemaps import GoogleMaps
+from flask_googlemaps import Map
+
+
 
 
 #==============================================
@@ -77,6 +81,8 @@ def get_hour_map(str_json):
 
 app = Flask(__name__)
 
+
+
 @app.route('/')
 def index():
     return "a Yelp clone for CS612"
@@ -85,8 +91,12 @@ def index():
 def home():
     return render_template('home.html')
 
-@app.route('/restaurants')
+
+
+@app.route('/search')
 def restaurants_list():
+    pageno = request.args.get("pageno","1") 
+    pageno = int(pageno)
     description = request.args.get("find_desc","restaurant") 
     location = request.args.get("find_loc","wilmington")
     location_search_string = f" and  ( b.address like '%{location}%' \
@@ -99,17 +109,25 @@ def restaurants_list():
    
     str_query = f"SELECT r.id, r.name , r.alias, r.display_phone, r.price,"
     str_query += f"b.address,b.city,b.state,b.stars, b.categories , r.review_count, r.image_url,"
-    str_query += f" b.hours "
+    str_query += f" b.hours, r.coordinates "
     str_query += f" FROM business b, restaurant r"
     str_query += f" where b.business_id = r.id "
     str_query += f" and ( b.categories like '%restaurant%' or b.categories like '%food%') "
     str_query += f" { location_search_string } "
     str_query += f" {desc_search_string} "
-    str_query += f" LIMIT 10   "
+    str_query += f" LIMIT 40   "
     print(str_query)
     conn = connect_db(db_file_name)
     restaurant_data = conn.cursor().execute(str_query).fetchall()
     conn.close()
+    page_count = round(len(restaurant_data)/10)
+    restaurants = restaurant_data[10*pageno-9:10*pageno]
+    locations = []
+    for restaurant in restaurants:
+        coordinate = json.loads(restaurant[13].replace("\'","\""))
+        name = restaurant[1]
+        locations.append([name,coordinate['latitude'],coordinate['longitude']])
+    print(locations)
     
     # str_query = "SELECT text from review\
     #             where business_id = 'Dy91wdWkwtI_qgjAIZ0Niw'\
@@ -119,7 +137,10 @@ def restaurants_list():
     
     
     return render_template('restaurants.html',
-                           restaurants = restaurant_data,
+                           restaurants = restaurants,
+                           pageno=pageno,
+                           page_count = page_count,
+                           locations = locations
                         #    review = review
                         #    review_data = review_data,
                         #    suggested_filters = suggested_filters,
